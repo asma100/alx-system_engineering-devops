@@ -1,2 +1,2 @@
 #!/bin/bash
-read input|  'Ac' 'Ze'
+tr 'Ac' 'Ze'
