@@ -1,0 +1,2 @@
+#!/bin/bash
+read input|tr -d ‘cC’h
