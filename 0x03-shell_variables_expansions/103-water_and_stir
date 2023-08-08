@@ -1,2 +1,2 @@
 #!/bin/bash
-A=${PATH//[^:]} ; echo $((${#A}+1))
+echo "$(($WATER+$STIR))
