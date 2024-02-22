@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# This script is displaying clock
-for i in $(ls); do
+# This script is displaying somthing 
+files=(*)
+for i in "${files[@]}"; do
   filename="${i#*-}"
   if [ -f "$i" ]; then
     echo "$filename"
