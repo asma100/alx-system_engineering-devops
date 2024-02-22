@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# This script is displaying somthing 
+
+if [ -e "/etc/passwd" ]; then
+  while IFS=: read -r username _ userid _ _ homedir _; do
+    echo "Username: $username"
+    echo "User ID: $userid"
+    echo "Home Directory: $homedir"
+  done < "/etc/passwd"
+
+else
+  echo "Error: /etc/passwd file not found."
+fi
