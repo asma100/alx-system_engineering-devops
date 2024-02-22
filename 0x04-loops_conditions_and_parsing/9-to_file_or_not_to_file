@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# This script is displaying somthing 
+if [ -f "school" ]; then
+  echo "school file exists"
+else
+  echo "school file does not exist"
+fi
+if [[ $(stat -c %s "school") -eq 0 ]]; then
+  echo "school file is empty"
+  else
+  echo "school file is not empty"
+fi
+if [ -f "school" ]; then
+  echo "File is a regular file."
+fi
