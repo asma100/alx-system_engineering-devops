@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script is displaying clock
+for i in $(ls); do
+  filename="${i#*-}"
+  if [ -f "$i" ]; then
+    echo "$filename"
+  fi
+done
