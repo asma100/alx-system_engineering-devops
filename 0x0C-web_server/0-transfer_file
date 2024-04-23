@@ -1,0 +1,13 @@
+ #!/bin/bash
+#transfer
+if [ "$#" -ne 3 ]; then
+    echo "Usage: $0 <file_to_transfer> <username@server_address> <destination_directory>"
+    exit 1
+fi
+
+local_file="$1"
+server_ip="$2"
+username="$3"
+ssh_key="$4"
+
+scp "$ssh_key" "$local_file" "$username@$server_ip:~/""

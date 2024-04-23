@@ -1,0 +1,6 @@
+#!/bin/bash
+#transferFile
+if [ "$#" -ne 3 ]; then
+    echo "Usage: $0 <file_to_transfer> <username@server_address> <destination_directory>"
+    exit 1
+fi
