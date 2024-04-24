@@ -1,13 +1,22 @@
- #!/bin/bash
-#transfer
-if [ "$#" -ne 3 ]; then
-    echo "Usage: $0 <file_to_transfer> <username@server_address> <destination_directory>"
-    exit 1
+#!/bin/bash
+
+# Transfer a file using SSH and SCP
+if [ "$#" -ne 4 ]; then
+  echo "Usage: $0 <file_to_transfer> <username@server_address> <destination_directory> <path_to_ssh_key>"
+  exit 1
 fi
 
+# Capture arguments efficiently
 local_file="$1"
 server_ip="$2"
 username="$3"
 ssh_key="$4"
 
-scp "$ssh_key" "$local_file" "$username@$server_ip:~/""
+# Validate SSH key path existence (optional but recommended)
+if [[ ! -f "$ssh_key" ]]; then
+  echo "Error: SSH key file '$ssh_key' does not exist."
+  exit 1
+fi
+
+# Secure SCP transfer with SSH key authentication
+scp -i "$ssh_key" "$local_file" "$username@$server_ip:~"
