@@ -1,0 +1,6 @@
+#!/bin/bash
+# Install nginx
+apt-get install -y nginx
+https://chat.openai.com/c/0bc34d8e-f51b-4507-b462-ad31183cf262#:~:text=sed%20%2Di%20%27s/%5E%5C(listen%5Cs%5C%2B%5C)80%5C(%5Cs*%3B%5C)/%5C180%5C2/%27%20/etc/nginx/sites%2Davailable/default
+service nginx restart
+echo "Hello World!" > /var/www/html/index.html
