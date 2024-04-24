@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Update package index
+11;rgb:0000/0000/0000# Update package index
 
 apt-get update
 
@@ -12,4 +12,4 @@ sed -i 's/^\(listen\s\+\)80\(\s*;\)/\180\2/' /etc/nginx/sites-available/default
 service nginx restart
 
 
-echo "Holberton School" > /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.html
