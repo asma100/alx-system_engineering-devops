@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-11;rgb:0000/0000/0000# Update package index
+
 
 apt-get update
 
@@ -9,7 +9,8 @@ apt-get install -y nginx
 
 sed -i 's/^\(listen\s\+\)80\(\s*;\)/\180\2/' /etc/nginx/sites-available/default
 
+echo "Hello World!" > /var/www/html/index.html
 service nginx restart
 
 
-echo "Hello World!" > /var/www/html/index.html
+
