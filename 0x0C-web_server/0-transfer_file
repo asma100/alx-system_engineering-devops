@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Transfer a file using SSH and SCP
 if [ "$#" -ne 4 ]; then
