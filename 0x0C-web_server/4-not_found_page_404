@@ -1,4 +1,5 @@
-
+#!/usr/bin/env bash
+#task4
 
 sudo apt-get update -y
 
