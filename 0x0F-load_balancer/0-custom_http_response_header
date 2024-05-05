@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
-#task 0
-sudo apt-get update -y
-sudo apt-get install nginx -y
-echo "Hello World!" | sudo dd status=none of=/var/www/html/index.html
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html 
-r="\\\n\tlocation /redirect_me {\n\t\t return 301 https://github.com/asma100;\n\t}\n"
-sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
-sudo sed -i "53i $r" /etc/nginx/sites-available/default
-r="\\\n\terror_page 404 /404.html;\n\n\tlocation = /404.html {\n\t\tinternal;\n\t}\n"
-sudo sed -i "53i $r" /etc/nginx/sites-available/default
+# Customizing a 404-error_page
+
+sudo apt-get update
+sudo apt-get install -y nginx
+
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+new_string="server_name _;\n\trewrite ^\/redirect_me hhttps:\/\/github.com\/asma100 permanent;"
+sudo sed -i "s/server_name _;/$new_string/" /etc/nginx/sites-enabled/default
+
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+new_string="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+
+sudo sed -i "s/listen 80 default_server;/$new_string/" /etc/nginx/sites-enabled/default
+
 sudo sed -i "/server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+
 sudo nginx -t
-sudo service nginx reload
+sudo service nginx restart
