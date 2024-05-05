@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Update and Upgrade System
+sudo apt update && sudo apt upgrade -y
+
+# Install HAproxy
+sudo apt install haproxy -y
+
+# Configure HAproxy for Load Balancing
+
+
+# Create HAproxy configuration file
+cat << EOF > /etc/haproxy/haproxy.cfg
+global
+    log /dev/log local0 notice
+    maxconn 2000
+    user haproxy
+    group haproxy
+
+defaults
+    mode http
+    option httplog
+    balance roundrobin
+
+frontend http_front
+    bind *:80
+    stats uri /haproxy? stats default_backend
+
+backend http_back
+    server 497141-web-01 54.236.53.167:80 check
+    server 497141-web-02 54.236.26.139:80 check
+EOF
+
+# Enable and Restart HAproxy service
+sudo systemctl enable haproxy
+sudo systemctl restart haproxy
+
+
+
+
+
