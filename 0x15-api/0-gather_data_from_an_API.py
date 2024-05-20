@@ -4,6 +4,7 @@
 import requests
 import sys
 
+
 def get_employee_todo_progress(employee_id):
     """Fetches TODO list progress for an employee using their ID."""
 
