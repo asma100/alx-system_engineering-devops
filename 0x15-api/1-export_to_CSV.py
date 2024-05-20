@@ -4,6 +4,7 @@ import requests
 import csv
 import sys
 
+
 def get_employee_todo_progress(employee_id):
     """Fetches TODO list progress for an employee using their ID and exports data to CSV."""
 
@@ -47,6 +48,7 @@ def get_employee_todo_progress(employee_id):
 
     print(f'Employee {name} is done with tasks({completed}/{total_tasks}):')
     print(f'Task data exported to: {filename}')
+
 
 if __name__ == "__main__":
     try:
