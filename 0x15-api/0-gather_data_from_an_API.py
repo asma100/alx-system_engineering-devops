@@ -1,0 +1,42 @@
+#!/usr/bin/python3
+
+"""TODO list """
+import requests
+import sys
+
+def get_employee_todo_progress(employee_id):
+    """Fetches TODO list progress for an employee using their ID."""
+
+    url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+    response = requests.get(url)
+    try:
+        user_data = response.json()
+    except json.JSONDecodeError:
+        print(f"Error parsing user data from JSON response.")
+        return
+
+    name = user_data["name"]
+    todo_url = f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
+    response = requests.get(todo_url)
+    try:
+        todo_data = response.json()
+    except json.JSONDecodeError:
+        print(f"Error parsing TODO data from JSON response.")
+        return
+
+    total_tasks = 0
+    completed = 0
+    for task in todo_data:
+        if task.get('userId') == int(employee_id):
+            total_tasks += 1
+            if task.get('completed'):
+                completed += 1
+
+    print(f'Employee {name} is done with tasks({completed}/{total_tasks}):')
+    print('\n'.join([f"\t {task.get('title')}" for task in todo_data if task.get('userId') == int(employee_id) and task.get('completed')]))
+
+
+if __name__ == "__main__":
+
+        employee_id = int(sys.argv[1])
+        get_employee_todo_progress(employee_id)
