@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 
-"""TODO list """
+"""Fetches TODO list progress for all employees and saves data as JSON."""
 import json
 import requests
 
 
 def fetch_all_employees_tasks():
-    """Fetches TODO list progress for an employee using their ID."""
+    """Fetches TODO list progress for all employees and returns a dictionary."""
 
     # URLs for the API endpoints
     users_url = "https://jsonplaceholder.typicode.com/users"
@@ -25,25 +25,31 @@ def fetch_all_employees_tasks():
 
     # Populate the structure
     for user in users:
-        user_id = user['id']
-        username = user['username']
-        user_tasks = []
-        
+        task_list = []
         for task in todos:
-            if task['userId'] == user_id:
-                user_tasks.append({
-                    "username": username,
-                    "task": task['title'],
-                    "completed": task['completed']
-                })
+            if task.get('userId') == user.get('id'):
+                task_dict = {
+                    "username": user.get('username'),
+                    "task": task.get('title'),
+                    "completed": task.get('completed')
+                }
+                task_list.append(task_dict)
 
-        all_tasks[user_id] = user_tasks
+        all_tasks[user.get('id')] = task_list
 
-    # Export to JSON in a compact format
-    with open('todo_all_employees.json', 'w') as json_file:
-        json.dump(all_tasks, json_file, separators=(',', ':'))
+    return all_tasks  # Return the dictionary containing all employee data
 
-    print("Data has been exported to todo_all_employees.json")
 
-# Run the function to fetch and export the tasks
-fetch_all_employees_tasks()
+if __name__ == "__main__":
+    try:
+        # Fetch data for all employees
+        all_employee_data = fetch_all_employees_tasks()
+
+        # Save data to JSON file
+        with open('todo_all_employees.json', mode='w') as f:
+            json.dump(all_employee_data, f)
+
+        print("Successfully saved TODO data for all employees to 'todo_all_employees.json'.")
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching data: {e}")
+
