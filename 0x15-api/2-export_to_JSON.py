@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """TODO list and export to JSON"""
-import requests
 import json
+import requests
 import sys
 
 def get_employee_todo_progress(employee_id):

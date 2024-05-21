@@ -49,7 +49,7 @@ if __name__ == "__main__":
         with open('todo_all_employees.json', mode='w') as f:
             json.dump(all_employee_data, f)
 
-        print("Successfully saved TODO data for all employees to 'todo_all_employees.json'.")
+       # print("Successfully saved TODO data for all employees to 'todo_all_employees.json'.")
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching data: {e}")
+        #print(f"Error fetching data: {e}")
 
