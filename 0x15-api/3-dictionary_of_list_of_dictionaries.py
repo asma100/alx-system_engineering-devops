@@ -1,7 +1,13 @@
+#!/usr/bin/env bash
+
+"""TODO list """
 import json
 import requests
 
+
 def fetch_all_employees_tasks():
+    """Fetches TODO list progress for an employee using their ID."""
+
     # URLs for the API endpoints
     users_url = "https://jsonplaceholder.typicode.com/users"
     todos_url = "https://jsonplaceholder.typicode.com/todos"
