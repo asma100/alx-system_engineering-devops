@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """Fetches TODO list progress for all employees and saves data as JSON."""
 import json
 import requests
