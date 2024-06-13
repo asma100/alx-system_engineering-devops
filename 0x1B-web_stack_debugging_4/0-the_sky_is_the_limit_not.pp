@@ -1,6 +1,6 @@
 #ULIMIT
 exec { 'set-ulimit-nginx':
-  command => 'echo "ULIMIT=\\"-n 1048576\\"" > /etc/default/nginx',
+  command => 'echo "ULIMIT=\"-n 1048576\"" > /etc/default/nginx',
   path    => ['/bin', '/usr/bin'],
   unless  => 'grep -q "ULIMIT=\\"-n 1048576\\"" /etc/default/nginx',
 }
