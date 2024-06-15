@@ -1,13 +1,4 @@
-#ULIMIT
-exec { 'set-ulimit-nginx':
-  command => 'echo "ULIMIT=\"-n 1048576\"" > /etc/default/nginx',
-  path    => ['/bin', '/usr/bin'],
-  unless  => 'grep -q "ULIMIT=\\"-n 1048576\\"" /etc/default/nginx',
+exec { 'Limit':
+  command => '/usr/bin/env sed -i s/15/2000/ /etc/default/nginx',
 }
-
-exec { 'reload-nginx':
-  command     => '/usr/sbin/service nginx reload',
-  path        => ['/sbin', '/usr/sbin', '/bin', '/usr/bin'],
-  refreshonly => true,
-  subscribe   => Exec['set-ulimit-nginx'],
-}
+exec { '/usr/bin/env service nginx restart': }
